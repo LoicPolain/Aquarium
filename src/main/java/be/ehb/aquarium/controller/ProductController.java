@@ -11,4 +11,9 @@ public class ProductController {
     public String productCreate(){
         return "productView/productCreate";
     }
+
+    @GetMapping(value = "/overview")
+    public String productOverview(){
+        return "productView/productOverview";
+    }
 }

@@ -1,1 +1,13 @@
-Readme
+Sources:
+    Bootstrap:
+        -https://getbootstrap.com/docs/5.3/getting-started/introduction/
+    Fragments:
+        -https://www.baeldung.com/spring-thymeleaf-fragments
+    Validation:
+        -https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-validation/3.2.0
+        -https://www.baeldung.com/java-hibernate-uuid-primary-key
+        -https://www.baeldung.com/spring-boot-bean-validation
+        -https://docs.jboss.org/hibernate/stable/validator/reference/en-US/html_single/#section-builtin-constraints
+        -https://www.baeldung.com/hibernate-validator-constraints
+        -https://www.baeldung.com/javax-bigdecimal-validation
+        -https://thorben-janssen.com/hibernate-enum-mappings/

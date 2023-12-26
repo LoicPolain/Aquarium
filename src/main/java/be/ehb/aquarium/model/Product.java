@@ -1,10 +1,7 @@
 package be.ehb.aquarium.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.Currency;
 
 import java.math.BigDecimal;
@@ -19,10 +16,11 @@ public class Product {
     private String productName;
     private String description;
     private String imagePath;
+    @NotNull
     @PositiveOrZero(message = "Price must be positive!")
     @Digits(integer = 4, fraction = 2, message = "Price must be valid")
-    @Currency(value = "EUR", message = "Price must be in euro €")
     private BigDecimal price;
+    @NotNull
     @Enumerated(EnumType.STRING) //Annotation makes sure that DB stores the category as type String, rather than Integer
     private Category category;
 

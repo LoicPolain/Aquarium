@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:insert="fragments/head::head">
+<head th:insert="~{fragments/head::head}">
 </head>
 <body>
-<nav th:insert="fragments/navbar::navbar"></nav>
+<nav th:insert="~{fragments/navbar::navbar}"></nav>
 <div class="container">
-    <form>
+    <form method="post" th:action="@{/product/create}" th:object="${product}">
         <legend>Add a new product to the catalogus</legend>
+
         <div class="mb-3">
             <label for="productName" class="form-label">Product name</label>
-            <input type="text" class="form-control" id="productName">
+            <input type="text" class="form-control" id="productName" th:field="*{productName}">
         </div>
+
         <div class="mb-3">
             <label for="productCat" class="form-label">Description</label>
-            <select id="productCat" class="form-select" aria-label="Default select example">
-                <option selected>Select category</option>
+            <select id="productCat" class="form-select" aria-label="Default select example" th:field="*{category}">
+                <option selected th:value="-1">Select category</option>
 
                 <!--This code gets the values of the enum "Category" and adds them as options to the select-->
-                <option th:each="category : ${T(be.ehb.aquarium.model.Category).values()}" th:value="${category}" th:text="${category.getDisplay()}">One</option>
+                <option th:each="category : ${T(be.ehb.aquarium.model.Category).values()}" th:value="${category}" th:text="${category.getDisplay()}"></option>
 
             </select>
         </div>
+
         <div class="mb-3">
             <label for="productDescription" class="form-label">Description</label>
-            <textarea class="form-control" id="productDescription" rows="3"></textarea>
+            <textarea class="form-control" id="productDescription" rows="3" th:field="*{description}"></textarea>
         </div>
+
+        <div class="input-group mb-3">
+            <span class="input-group-text">€</span>
+            <input type="number" th:step="0.01" class="form-control" placeholder="e.g. 3.99" th:field="*{price}">
+        </div>
+
         <button type="submit" class="btn btn-primary">Add Product</button>
     </form>
 </div>

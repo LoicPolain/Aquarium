@@ -14,3 +14,5 @@ Sources:
     Select - Enum:
         -https://stackoverflow.com/questions/29515366/how-to-display-all-possible-enum-values-in-a-dropdown-list-using-spring-and-thym
         -https://stackoverflow.com/questions/73606088/how-to-display-all-enum-values-in-spring-using-thymeleaf-and-bootstrap
+    Redirects:
+        -https://www.baeldung.com/spring-redirect-and-forward

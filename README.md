@@ -11,3 +11,6 @@ Sources:
         -https://www.baeldung.com/hibernate-validator-constraints
         -https://www.baeldung.com/javax-bigdecimal-validation
         -https://thorben-janssen.com/hibernate-enum-mappings/
+    Select - Enum:
+        -https://stackoverflow.com/questions/29515366/how-to-display-all-possible-enum-values-in-a-dropdown-list-using-spring-and-thym
+        -https://stackoverflow.com/questions/73606088/how-to-display-all-enum-values-in-spring-using-thymeleaf-and-bootstrap

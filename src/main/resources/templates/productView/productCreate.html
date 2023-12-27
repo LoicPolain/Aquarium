@@ -5,12 +5,17 @@
 <body>
 <nav th:insert="~{fragments/navbar::navbar}"></nav>
 <div class="container">
-    <form method="post" th:action="@{/product/create}" th:object="${product}">
+    <form method="post" th:action="@{/product/create}" th:object="${product}" enctype="multipart/form-data">
         <legend>Add a new product to the catalogus</legend>
 
         <div class="mb-3">
             <label for="productName" class="form-label">Product name</label>
             <input type="text" class="form-control" id="productName" th:field="*{productName}">
+        </div>
+
+        <div class="mb-3">
+            <label for="productImage" class="form-label">Product image</label>
+            <input class="form-control" type="file" id="productImage" name="productImage">
         </div>
 
         <div class="mb-3">

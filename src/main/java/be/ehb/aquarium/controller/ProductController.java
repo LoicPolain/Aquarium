@@ -4,18 +4,24 @@ import be.ehb.aquarium.model.Product;
 import be.ehb.aquarium.model.dao.ProductRepo;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Controller
 @RequestMapping("/product")
 public class ProductController {
     @Autowired
     private ProductRepo productRepo;
+    @Value("${productImage.directory}")
+    private final String PRODUCT_IMAGE_FOLDER = System.getProperty("productImage.directory");
     @GetMapping(value = "/create")
     public String getProductCreate(){
         return "productView/productCreate";
@@ -27,9 +33,25 @@ public class ProductController {
     }
 
     @PostMapping(value = "/create")
-    public String postProductAdd(@Valid Product product, BindingResult bindingResult){
+    public String postProductAdd(@RequestParam("productImage") MultipartFile productImage, @Valid Product product, BindingResult bindingResult){
         if (!bindingResult.hasErrors()){
-            productRepo.save(product);
+            product = productRepo.save(product);
+
+            //This code checks if an image has been uploaded and if so save the image in the corresponding folder and adds its path to the table in the DB.
+            if (!productImage.isEmpty()){
+
+                String path = PRODUCT_IMAGE_FOLDER + product.getId();
+                Path fileNameAndPath = Paths.get(path, productImage.getOriginalFilename());
+
+                try {
+                    Files.createDirectory(Paths.get(path));
+                    product.setImagePath(path);
+                    productRepo.save(product);
+                    Files.write(fileNameAndPath, productImage.getBytes());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
             return "productView/productLstOverview";
         }
         return "productView/productCreate";

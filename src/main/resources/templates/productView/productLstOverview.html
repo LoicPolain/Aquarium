@@ -1,8 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:insert="fragments/head::head">
+<head th:insert="~{fragments/head::head}">
 </head>
 <body>
-<nav th:insert="fragments/navbar::navbar"></nav>
+<nav th:insert="~{fragments/navbar::navbar}"></nav>
+<br>
+<div class="container d-flex flex-wrap justify-content-around align-items-stretch">
+    <div class="mb-3 align-self-stretch" th:each="product : ${products}">
+
+        <div class="card mb-3" style="width: 18rem;">
+            <img th:src="@{/productImages/{id}/{fileName}(id=${product.id}, fileName=*{product.imagePath})}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${product.productName}"></h5>
+                <p class="card-text" th:text="${product.description}"></p>
+                <p class="card-text" th:text="|&euro; ${product.price}|"></p>
+                <a th:href="@{~/product/details/{id}(id=${product.id})}" class="btn btn-primary">Details</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

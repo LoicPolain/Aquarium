@@ -5,7 +5,7 @@
 <body>
 <nav th:insert="~{fragments/navbar::navbar}"></nav>
 <div class="container">
-    <form method="post" th:action="@{/product/create}" th:object="${product}" enctype="multipart/form-data">
+    <form method="post" th:action="@{/product/create}" th:object="${productObject}" enctype="multipart/form-data">
         <legend>Add a new product to the catalogus</legend>
 
         <div class="mb-3">

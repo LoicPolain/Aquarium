@@ -17,3 +17,6 @@ Sources:
     Imgae upload:
         -https://www.baeldung.com/spring-boot-thymeleaf-image-upload
         -https://stackoverflow.com/questions/42013087/multipartexception-current-request-is-not-a-multipart-request
+    ModelView:
+        -https://www.thymeleaf.org/doc/articles/springmvcaccessdata.html
+        -https://www.baeldung.com/spring-redirect-and-forward

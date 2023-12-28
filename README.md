@@ -20,3 +20,9 @@ Sources:
     ModelView:
         -https://www.thymeleaf.org/doc/articles/springmvcaccessdata.html
         -https://www.baeldung.com/spring-redirect-and-forward
+    Spring Security:
+        -https://docs.spring.io/spring-security/reference/getting-spring-security.html#getting-maven-boot
+        -https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security/3.2.1
+        -https://www.youtube.com/watch?v=b9O9NI-RJ3o
+        -https://springjavatutorial.medium.com/spring-security-login-form-with-database-authentication-9adc66f889dc
+        -https://docs.spring.io/spring-security/reference/servlet/getting-started.html

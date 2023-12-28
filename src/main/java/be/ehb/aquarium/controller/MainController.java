@@ -6,8 +6,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MainController {
-    @GetMapping(value = {"/", "index"})
+    @GetMapping(value = {"/", "/index"})
     public String getHomepage(){
-        return "Homepage";
+        return "mainView/Homepage";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        return "mainView/login";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        return "redirect:/login";
     }
 }

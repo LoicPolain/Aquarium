@@ -4,34 +4,44 @@
 </head>
 <body>
 
-
 <br>
+
 <div class="container">
-    <div th:if="${param.error}">
-        <div class="alert alert-warning" role="alert">
-            Invalid username and password.
-        </div>
-    </div>
-    <div th:if="${param.logout}">
-        <div class="alert alert-success" role="alert">
-            You have been logged out.
-        </div>
-    </div>
-
-    <form th:action="@{/login}" method="post">
-
-        <legend>Please Log In</legend>
+    <form method="post" th:action="@{/register}" th:object="${registeredUser}">
+        <legend>Create an account</legend>
 
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email address</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" name="username" aria-describedby="emailHelp">
+            <label for="userEmail" class="form-label">Email address</label>
+            <label for="userEmail" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></label>
+            <input type="email" class="form-control" id="userEmail" aria-describedby="emailHelp" th:field="*{email}">
             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
         </div>
+
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+            <label for="UserFirstname" class="form-label">Firstname</label>
+            <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('firstname')}" th:errorclass="error" th:errors="*{firstname}">
+                A simple danger alert—check it out!
+            </div>
+
+            <input type="text" class="form-control" id="UserFirstname" th:field="*{firstname}">
         </div>
-        <button type="submit" value="Log in" class="btn btn-primary">Submit</button>
+
+        <div class="mb-3">
+            <label for="UserLastname" class="form-label">Lastname</label>
+            <input type="text" class="form-control" id="UserLastname" th:field="*{lastname}">
+        </div>
+
+        <div class="mb-3">
+            <label for="Username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="Username" th:field="*{username}">
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" th:field="*{password}">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create account</button>
     </form>
 </div>
 </body>

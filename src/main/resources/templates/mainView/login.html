@@ -31,7 +31,10 @@
             <label for="exampleInputPassword1" class="form-label">Password</label>
             <input type="password" class="form-control" id="exampleInputPassword1" name="password">
         </div>
-        <button type="submit" value="Log in" class="btn btn-primary">Submit</button>
+        <div class="d-flex justify-content-between">
+            <button type="submit" value="Log in" class="btn btn-primary">Submit</button>
+            <a th:href="@{~/register}" class="link-primary">Register</a>
+        </div>
     </form>
 </div>
 </body>

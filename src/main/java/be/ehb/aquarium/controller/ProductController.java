@@ -5,6 +5,7 @@ import be.ehb.aquarium.model.dao.ProductRepo;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +21,8 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/product")
 public class ProductController {
-    @Autowired
     private ProductRepo productRepo;
+
     @Value("${productImage.directory}")
     private final String PRODUCT_IMAGE_FOLDER = System.getProperty("productImage.directory");
 
@@ -29,11 +30,15 @@ public class ProductController {
     public Product getProduct(){
         return new Product();
     }
-
     @ModelAttribute("products")
     public Iterable<Product> getAllProduct(){
         return productRepo.findAll();
     }
+    @Autowired
+    public ProductController(ProductRepo productRepo) {
+        this.productRepo = productRepo;
+    }
+
     @GetMapping(value = "/create")
     public String getProductCreate(){
         return "productView/productCreate";

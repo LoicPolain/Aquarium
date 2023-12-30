@@ -1,8 +1,8 @@
 package be.ehb.aquarium.model.enums;
 
 public enum Pricefilter {
-    ASCEDANT("Ascedant"),
-    DESCENDANT("Descedant");
+    ASC("Ascedant"),
+    DESC("Descedant");
 
     private final String display;
 

@@ -3,6 +3,7 @@ package be.ehb.aquarium.controller;
 import be.ehb.aquarium.model.enums.Category;
 import be.ehb.aquarium.model.Product;
 import be.ehb.aquarium.model.dao.ProductRepo;
+import be.ehb.aquarium.model.enums.Pricefilter;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -92,14 +93,14 @@ public class ProductController {
     }
 
     @PostMapping("/overview/price")
-    public ModelAndView postProductOverviewByPrice(@RequestParam("price")String category){
+    public ModelAndView postProductOverviewByPrice(@RequestParam("priceFilter")String priceFilter){
         ModelAndView modelAndView = new ModelAndView("productView/productLstOverview");
-        if (!category.isBlank()) {
-            modelAndView.addObject("products", productRepo.findAllByCategory(Category.valueOf(category)));
-            modelAndView.addObject("selectedPrice", Category.valueOf(category));
+        if (!priceFilter.isBlank()) {
+            if (Pricefilter.valueOf(priceFilter).equals(Pricefilter.ASC)) modelAndView.addObject("products", productRepo.findAllOrderByPriceAscedant());
+            else modelAndView.addObject("products", productRepo.findAllOrderByPriceDescedant());
+            modelAndView.addObject("selectedPrice", Pricefilter.valueOf(priceFilter));
         }
         else modelAndView.addObject("products", productRepo.findAll());
-
 
         return modelAndView;
     }

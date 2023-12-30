@@ -23,8 +23,8 @@
 
             <form method="post" th:action="@{/product/overview/price}" th:object="${productObject}" enctype="multipart/form-data">
                 <div class="mb-3">
-                    <label for="productFilterPrice" class="form-label">Category</label>
-                    <select onchange="this.form.submit()" id="productFilterPrice" class="form-select" aria-label="Default select example" name="price">
+                    <label for="productFilterPrice" class="form-label">Price</label>
+                    <select onchange="this.form.submit()" id="productFilterPrice" class="form-select" aria-label="Default select example" name="priceFilter">
                         <option th:value="null">All</option>
 
                         <!--This code gets the values of the enum "priceFilter" and adds them as options to the select-->

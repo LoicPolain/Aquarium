@@ -45,7 +45,7 @@ public class ProductController {
     }
 
     @PostMapping(value = "/create")
-    public ModelAndView postProductAdd(@RequestParam("productImage") MultipartFile productImage, @Valid Product product, BindingResult bindingResult){
+    public ModelAndView postProductAdd(@RequestParam("productImage") MultipartFile productImage, @Valid @ModelAttribute("productObject") Product product, BindingResult bindingResult){
         ModelAndView modelAndView = new ModelAndView("productView/productCreate");
         if (!bindingResult.hasErrors()){
             product = productRepo.save(product);

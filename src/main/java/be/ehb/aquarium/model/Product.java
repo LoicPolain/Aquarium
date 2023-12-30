@@ -16,12 +16,12 @@ public class Product {
     private String productName;
     private String description;
     private String imagePath;
-    @NotNull
+    @NotNull(message = "You need to enter a price")
     @PositiveOrZero(message = "Price must be positive!")
     @Digits(integer = 4, fraction = 2, message = "Price must be valid")
     private BigDecimal price;
-    @NotNull
     @Enumerated(EnumType.STRING) //Annotation makes sure that DB stores the category as type String, rather than Integer
+    @NotNull(message = "You need to select a category!")
     private Category category;
 
     public Product() {

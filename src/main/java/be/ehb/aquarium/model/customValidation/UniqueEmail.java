@@ -8,7 +8,6 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = UniqueEmailValidator.class)
 @Target({ ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
-@Documented
 public @interface UniqueEmail {
     String message() default "Email address does already exist!";
 

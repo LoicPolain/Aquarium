@@ -2,12 +2,11 @@ package be.ehb.aquarium.model;
 
 import be.ehb.aquarium.model.customValidation.MatchingPassword;
 import be.ehb.aquarium.model.customValidation.UniqueEmail;
+import be.ehb.aquarium.model.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.UUID;
 

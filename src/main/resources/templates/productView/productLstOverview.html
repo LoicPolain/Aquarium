@@ -5,6 +5,41 @@
 <body>
 <nav th:insert="~{fragments/navbar::navbar}"></nav>
 <br>
+    <div class="container mb-3">
+        <legend>Filter by:</legend>
+        <div class="container d-flex flex-wrap justify-content-around align-items-stretch">
+            <form method="post" th:action="@{/product/overview/category}" th:object="${productObject}" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="productCat" class="form-label">Category</label>
+                    <select onchange="this.form.submit()" id="productCat" class="form-select" aria-label="Default select example" name="category">
+                        <option th:value="null">All</option>
+
+                        <!--This code gets the values of the enum "Category" and adds them as options to the select-->
+                        <option th:each="category : ${T(be.ehb.aquarium.model.enums.Category).values()}" th:value="${category}" th:text="${category.getDisplay()}" th:selected="${selectedCat == category}"></option>
+
+                    </select>
+                </div>
+            </form>
+
+            <form method="post" th:action="@{/product/overview/price}" th:object="${productObject}" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="productFilterPrice" class="form-label">Category</label>
+                    <select onchange="this.form.submit()" id="productFilterPrice" class="form-select" aria-label="Default select example" name="price">
+                        <option th:value="null">All</option>
+
+                        <!--This code gets the values of the enum "priceFilter" and adds them as options to the select-->
+                        <option th:each="priceFilter : ${T(be.ehb.aquarium.model.enums.Pricefilter).values()}" th:value="${priceFilter}" th:text="${priceFilter.getDisplay()}" th:selected="${selectedPrice == priceFilter}"></option>
+
+                    </select>
+                </div>
+            </form>
+
+
+
+        </div>
+
+    </div>
+
 <div class="container d-flex flex-wrap justify-content-around align-items-stretch">
     <div class="mb-3 align-self-stretch" th:each="product : ${products}">
 
@@ -13,6 +48,7 @@
             <div class="card-body">
                 <h5 class="card-title" th:text="${product.productName}"></h5>
                 <p class="card-text" th:text="${product.description}"></p>
+                <p class="card-text" th:text="${product.category}"></p>
                 <p class="card-text" th:text="|&euro; ${product.price}|"></p>
                 <a th:href="@{~/product/details/{id}(id=${product.id})}" class="btn btn-primary">Details</a>
             </div>

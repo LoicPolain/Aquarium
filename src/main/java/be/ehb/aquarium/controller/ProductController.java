@@ -1,11 +1,11 @@
 package be.ehb.aquarium.controller;
 
+import be.ehb.aquarium.model.enums.Category;
 import be.ehb.aquarium.model.Product;
 import be.ehb.aquarium.model.dao.ProductRepo;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -49,7 +49,7 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView("productView/productCreate");
         if (!bindingResult.hasErrors()){
             product = productRepo.save(product);
-            modelAndView = new ModelAndView("productView/productDetails");
+            modelAndView = new ModelAndView("redirect:/product/overview");
 
             //This code checks if an image has been uploaded and if so save the image in the corresponding folder and adds its path to the table in the DB.
             if (!productImage.isEmpty()){
@@ -76,6 +76,32 @@ public class ProductController {
     @GetMapping(value = "/overview")
     public String getProductOverview(){
         return "productView/productLstOverview";
+    }
+
+    @PostMapping("/overview/category")
+    public ModelAndView postProductOverviewByCategory(@RequestParam("category")String category){
+        ModelAndView modelAndView = new ModelAndView("productView/productLstOverview");
+        if (!category.isBlank()) {
+            modelAndView.addObject("products", productRepo.findAllByCategory(Category.valueOf(category)));
+            modelAndView.addObject("selectedCat", Category.valueOf(category));
+        }
+        else modelAndView.addObject("products", productRepo.findAll());
+
+
+        return modelAndView;
+    }
+
+    @PostMapping("/overview/price")
+    public ModelAndView postProductOverviewByPrice(@RequestParam("price")String category){
+        ModelAndView modelAndView = new ModelAndView("productView/productLstOverview");
+        if (!category.isBlank()) {
+            modelAndView.addObject("products", productRepo.findAllByCategory(Category.valueOf(category)));
+            modelAndView.addObject("selectedPrice", Category.valueOf(category));
+        }
+        else modelAndView.addObject("products", productRepo.findAll());
+
+
+        return modelAndView;
     }
 
     @GetMapping(value = "/details/{id}")

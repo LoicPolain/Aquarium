@@ -1,8 +1,8 @@
 package be.ehb.aquarium.model;
 
+import be.ehb.aquarium.model.enums.Category;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import org.hibernate.validator.constraints.Currency;
 
 import java.math.BigDecimal;
 import java.util.UUID;

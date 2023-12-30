@@ -17,8 +17,6 @@ public class PasswordMatchingValidator implements ConstraintValidator<MatchingPa
     public boolean isValid(Object o, ConstraintValidatorContext constraintValidatorContext) {
         Object passwordValue = new BeanWrapperImpl(o).getPropertyValue(password);
         Object confirmPasswordValue = new BeanWrapperImpl(o).getPropertyValue(confirmPassword);
-        System.out.println(passwordValue);
-        System.out.println(confirmPasswordValue);
         return (passwordValue != null) ? passwordValue.equals(confirmPasswordValue) : confirmPasswordValue == null;
     }
 }

@@ -1,4 +1,4 @@
-package be.ehb.aquarium.model;
+package be.ehb.aquarium.model.enums;
 
 public enum Role {
     USER,

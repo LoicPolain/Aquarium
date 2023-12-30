@@ -1,6 +1,7 @@
 package be.ehb.aquarium.model;
 
 import be.ehb.aquarium.model.customValidation.MatchingPassword;
+import be.ehb.aquarium.model.customValidation.UniqueEmail;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -24,6 +25,7 @@ public class User {
     private String username;
     @Email(message = "E-mail must be valid!")
     @NotBlank(message = "E-mail cannot be empty, blank or whitespace!")
+    @UniqueEmail(message = "Email address does already exist!")
     private String email;
     @NotBlank(message = "Password cannot be empty, blank or whitespace!")
     @Size(min = 8, message = "Password must be at least 8 characters long!")

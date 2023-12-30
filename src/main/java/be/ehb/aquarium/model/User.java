@@ -1,29 +1,38 @@
 package be.ehb.aquarium.model;
 
+import be.ehb.aquarium.model.customValidation.MatchingPassword;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.UUID;
 
 @Entity
+@MatchingPassword(password = "password", confirmPassword = "confirmPassword", message = "Both Passwords must be the same!")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    @NotBlank(message = "Name is mandatory!")
+    @NotBlank(message = "Firstname cannot be empty, blank or whitespace!")
     private String firstname;
-    @NotBlank(message = "Name is mandatory!")
+    @NotBlank(message = "Lastname cannot be empty, blank or whitespace!")
     private String lastname;
-    @NotBlank(message = "Name is mandatory!")
+    @NotBlank(message = "Username cannot be empty, blank or whitespace!")
     private String username;
-    @Email
-    @NotBlank(message = "E-mail is mandatory!")
+    @Email(message = "E-mail must be valid!")
+    @NotBlank(message = "E-mail cannot be empty, blank or whitespace!")
     private String email;
-    @NotBlank(message = "E-mail is mandatory!")
+    @NotBlank(message = "Password cannot be empty, blank or whitespace!")
+    @Size(min = 8, message = "Password must be at least 8 characters long!")
     private String password;
+
+    @Transient
+    @NotBlank(message = "Password cannot be empty, blank or whitespace!")
+    @Size(min = 8, message = "Password must be at least 8 characters long!")
+    private String confirmPassword;
     @Enumerated(EnumType.STRING) //Annotation makes sure that DB stores the category as type String, rather than Integer
     private Role role = Role.USER;
 
@@ -75,7 +84,15 @@ public class User {
     }
 
     public void setPassword(String password) {
-        this.password = new BCryptPasswordEncoder().encode(password);
+        this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public Role getRole() {

@@ -27,3 +27,5 @@ Sources:
         -https://springjavatutorial.medium.com/spring-security-login-form-with-database-authentication-9adc66f889dc
         -https://docs.spring.io/spring-security/reference/servlet/getting-started.html
         -https://www.javaguides.net/2018/10/user-registration-module-using-springboot-springmvc-springsecurity-hibernate5-thymeleaf-mysql.html
+    Custom validation:
+        -https://www.bezkoder.com/spring-boot-custom-validation/

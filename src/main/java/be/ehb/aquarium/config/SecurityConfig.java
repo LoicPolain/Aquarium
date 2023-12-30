@@ -28,8 +28,8 @@ public class SecurityConfig{
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/register/**").permitAll()
                         .requestMatchers("/productImages/**").permitAll()
-                        .requestMatchers("/product/**").authenticated()
                         .requestMatchers("/product/create").hasAuthority("ADMIN")
+                        .requestMatchers("/product/**").authenticated()
                         .requestMatchers("/").authenticated()
                 )
                 .formLogin(form -> form

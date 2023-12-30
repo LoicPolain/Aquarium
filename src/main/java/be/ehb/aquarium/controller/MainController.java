@@ -4,6 +4,7 @@ import be.ehb.aquarium.model.User;
 import be.ehb.aquarium.model.dao.UserRepo;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -50,12 +51,13 @@ public class MainController {
     }
 
     @PostMapping(value = "/register")
-    public String register(@Valid User user, BindingResult bindingResult){
+    public String register(@Valid @ModelAttribute("registeredUser") User user, BindingResult bindingResult){
         if (!bindingResult.hasErrors()){
+            user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+            user.setConfirmPassword(user.getPassword());
             userRepo.save(user);
             return "redirect:/login";
         }
-        bindingResult.getAllErrors().forEach(objectError -> System.out.println(objectError.toString()));
-        return "redirect:/register";
+        return "mainView/register";
     }
 }

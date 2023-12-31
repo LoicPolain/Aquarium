@@ -53,8 +53,8 @@
 
                 <div class="container d-flex flex-wrap justify-content-around align-items-stretch">
                     <a th:href="@{~/product/details/{id}(id=${product.id})}" class="btn btn-primary">Details</a>
-                    <form method="post" th:action="@{/product/cart}" th:object="${cartObject}">
-
+                    <form method="post" th:action="@{/product/cart}">
+                        <input type="hidden" name="productId" th:value="${product.id}">
                         <button type="submit" class="btn btn-primary">Add to cart</button>
                     </form>
                 </div>

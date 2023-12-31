@@ -1,5 +1,9 @@
 package be.ehb.aquarium.controller;
 
+import be.ehb.aquarium.model.ShoppingCart;
+import be.ehb.aquarium.model.User;
+import be.ehb.aquarium.model.dao.ShoppingCartRepo;
+import be.ehb.aquarium.model.dao.UserRepo;
 import be.ehb.aquarium.model.enums.Category;
 import be.ehb.aquarium.model.Product;
 import be.ehb.aquarium.model.dao.ProductRepo;
@@ -24,7 +28,9 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/product")
 public class ProductController {
-    private ProductRepo productRepo;
+    private final ProductRepo productRepo;
+    private final UserRepo userRepo;
+    private final ShoppingCartRepo shoppingCartRepo;
 
     @Value("${productImage.directory}")
     private final String PRODUCT_IMAGE_FOLDER = System.getProperty("productImage.directory");
@@ -38,8 +44,10 @@ public class ProductController {
         return productRepo.findAll();
     }
     @Autowired
-    public ProductController(ProductRepo productRepo) {
+    public ProductController(ProductRepo productRepo, UserRepo userRepo, ShoppingCartRepo shoppingCartRepo) {
         this.productRepo = productRepo;
+        this.userRepo = userRepo;
+        this.shoppingCartRepo = shoppingCartRepo;
     }
 
     @GetMapping(value = "/create")
@@ -116,10 +124,18 @@ public class ProductController {
     }
 
     @PostMapping("/cart")
-    public String postAddProductToCart(@RequestParam("cartObject")String cartObject){
+    public String postAddProductToCart(@RequestParam("productId") UUID productId){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentUser = authentication.getName();
-        System.out.println(currentUser);
+        String currentUserEmail = authentication.getName();
+        User tempUser = userRepo.findFirstByEmail(currentUserEmail);
+
+        ShoppingCart tempShoppingCart = shoppingCartRepo.findFirstByUser(tempUser);
+        if (tempShoppingCart == null) tempShoppingCart = new ShoppingCart();
+        Product tempProduct = productRepo.findFirstById(productId);
+        tempShoppingCart.getProducts().add(tempProduct);
+        tempShoppingCart.setUser(tempUser);
+
+        shoppingCartRepo.save(tempShoppingCart);
         return "redirect:/product/overview";
     }
 

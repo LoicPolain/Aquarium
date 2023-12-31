@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MainController {
-    private UserRepo userRepo;
-    private PasswordEncoder passwordEncoder;
+    private final UserRepo userRepo;
 
     @ModelAttribute("registeredUser")
     public User getUser(){
@@ -26,7 +25,6 @@ public class MainController {
     @Autowired
     public MainController(UserRepo userRepo, PasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
-        this.passwordEncoder = passwordEncoder;
     }
 
 

@@ -29,7 +29,9 @@ public class SecurityConfig{
                         .requestMatchers("/register/**").permitAll()
                         .requestMatchers("/productImages/**").permitAll()
                         .requestMatchers("/product/create").hasAuthority("ADMIN")
+                        .requestMatchers("/product/cart").authenticated()
                         .requestMatchers("/product/**").authenticated()
+                        .requestMatchers("/cart/**").authenticated()
                         .requestMatchers("/").authenticated()
                 )
                 .formLogin(form -> form

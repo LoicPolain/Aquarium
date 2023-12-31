@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:insert="~{fragments/head::head}">
+<head th:insert="~{fragments/head::head('Shoppingcart')}">
 </head>
 <body>
 <nav th:insert="~{fragments/navbar::navbar}"></nav>
 
 <div class="container">
-    <table class="table">
+    <table class="table" th:if="${shoppingCart != null}">
         <thead>
         <tr>
             <th scope="col"></th>
@@ -24,10 +24,28 @@
             <th scope="row">Total:</th>
             <td></td>
             <td></td>
-            <td></td>
+            <td th:text="${shoppingCartTotalPrice}"></td>
         </tr>
         </tbody>
     </table>
+
+    <div th:if="${shoppingCart != null}">
+        <form method="post" th:action="@{/cart/order}">
+            <input type="hidden" name="cartId" th:value="${shoppingCart.id}">
+            <button type="submit" class="btn btn-primary">Order</button>
+        </form>
+    </div>
+
+    <div th:if="${shoppingCart == null}">
+        <br>
+        <div class="alert alert-primary" role="alert">
+            No products to show.
+        </div>
+    </div>
+
+
+
+
 </div>
 
 </body>

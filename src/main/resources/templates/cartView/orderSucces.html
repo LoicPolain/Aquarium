@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{fragments/head::head('Order status')}">
+</head>
+<body>
+<nav th:insert="~{fragments/navbar::navbar}"></nav>
+<br>
+
+<div th:if="${succes != null}" class="container">
+    <div class="alert alert-success" role="alert">
+        Order succesfully made!
+    </div>
+</div>
+
+<div th:if="${succes == null}" class="container">
+    <div class="alert alert-warning" role="alert">
+        No order has been made!
+    </div>
+</div>
+
+</body>
+</html>

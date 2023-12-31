@@ -36,6 +36,8 @@ public class User {
     private String confirmPassword;
     @Enumerated(EnumType.STRING) //Annotation makes sure that DB stores the category as type String, rather than Integer
     private Role role = Role.USER;
+    @OneToOne
+    private ShoppingCart shoppingCart;
 
     public User() {
     }

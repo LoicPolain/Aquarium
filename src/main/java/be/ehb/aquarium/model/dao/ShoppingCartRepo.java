@@ -8,4 +8,5 @@ import java.util.UUID;
 
 public interface ShoppingCartRepo extends CrudRepository<ShoppingCart, UUID> {
     ShoppingCart findFirstByUser(User user);
+    ShoppingCart findFirstById(UUID id);
 }

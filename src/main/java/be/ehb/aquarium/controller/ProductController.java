@@ -7,6 +7,8 @@ import be.ehb.aquarium.model.enums.Pricefilter;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -112,4 +114,13 @@ public class ProductController {
         modelAndView.addObject("product", productRepo.findFirstById(id));
         return modelAndView;
     }
+
+    @PostMapping("/cart")
+    public String postAddProductToCart(@RequestParam("cartObject")String cartObject){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUser = authentication.getName();
+        System.out.println(currentUser);
+        return "redirect:/product/overview";
+    }
+
 }

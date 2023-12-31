@@ -27,5 +27,11 @@ Sources:
         -https://springjavatutorial.medium.com/spring-security-login-form-with-database-authentication-9adc66f889dc
         -https://docs.spring.io/spring-security/reference/servlet/getting-started.html
         -https://www.javaguides.net/2018/10/user-registration-module-using-springboot-springmvc-springsecurity-hibernate5-thymeleaf-mysql.html
+        -https://www.baeldung.com/get-user-in-spring-security
     Custom validation:
         -https://www.bezkoder.com/spring-boot-custom-validation/
+        -https://stackoverflow.com/questions/67106772/java-spring-boot-how-to-access-application-properties-values-in-normal-class
+    JPA Relationships:
+        -https://medium.com/@bectorhimanshu/spring-data-jpa-many-to-many-bidirectional-relationship-mapping-a275f8ea62ec
+        -https://medium.com/@arijit83work/bidirectional-relationship-using-onetomany-manytoone-annotation-in-spring-boot-3b91980ca222
+

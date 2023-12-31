@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -23,6 +25,10 @@ public class Product {
     @Enumerated(EnumType.STRING) //Annotation makes sure that DB stores the category as type String, rather than Integer
     @NotNull(message = "You need to select a category!")
     private Category category;
+
+    @ManyToMany
+    @JoinTable(name = "product_shoppingcart", joinColumns = @JoinColumn(name = "product_id", nullable = false, referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "shoppingCarts_id", nullable = false, referencedColumnName = "id"))
+    private Set<ShoppingCart> shoppingCarts = new HashSet<>();
 
     public Product() {
     }

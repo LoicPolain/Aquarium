@@ -5,6 +5,7 @@
 <body>
 <nav th:insert="~{fragments/navbar::navbar}"></nav>
 <div class="container">
+<!--    enctype="multipart/form-data" ==> is needed in order to upload product image-->
     <form method="post" th:action="@{/product/create}" th:object="${productObject}" enctype="multipart/form-data">
         <legend>Add a new product to the catalogus</legend>
 

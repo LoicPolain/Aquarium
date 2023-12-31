@@ -8,7 +8,7 @@
     <div class="container mb-3">
         <legend>Filter by:</legend>
         <div class="container d-flex flex-wrap justify-content-around align-items-stretch">
-            <form method="post" th:action="@{/product/overview/category}" th:object="${productObject}" enctype="multipart/form-data">
+            <form method="post" th:action="@{/product/overview/category}" th:object="${productObject}">
                 <div class="mb-3">
                     <label for="productCat" class="form-label">Category</label>
                     <select onchange="this.form.submit()" id="productCat" class="form-select" aria-label="Default select example" name="category">
@@ -21,7 +21,7 @@
                 </div>
             </form>
 
-            <form method="post" th:action="@{/product/overview/price}" th:object="${productObject}" enctype="multipart/form-data">
+            <form method="post" th:action="@{/product/overview/price}" th:object="${productObject}">
                 <div class="mb-3">
                     <label for="productFilterPrice" class="form-label">Price</label>
                     <select onchange="this.form.submit()" id="productFilterPrice" class="form-select" aria-label="Default select example" name="priceFilter">
@@ -50,7 +50,14 @@
                 <p class="card-text" th:text="${product.description}"></p>
                 <p class="card-text" th:text="${product.category}"></p>
                 <p class="card-text" th:text="|&euro; ${product.price}|"></p>
-                <a th:href="@{~/product/details/{id}(id=${product.id})}" class="btn btn-primary">Details</a>
+
+                <div class="container d-flex flex-wrap justify-content-around align-items-stretch">
+                    <a th:href="@{~/product/details/{id}(id=${product.id})}" class="btn btn-primary">Details</a>
+                    <form method="post" th:action="@{/product/cart}" th:object="${cartObject}">
+
+                        <button type="submit" class="btn btn-primary">Add to cart</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

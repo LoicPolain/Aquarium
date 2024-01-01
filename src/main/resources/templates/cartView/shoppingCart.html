@@ -10,8 +10,8 @@
         <thead>
         <tr>
             <th scope="col"></th>
-            <th scope="col">Product</th>
-            <th scope="col">Price</th>
+            <th scope="col" th:text="#{shoppingCartPage.productsTitle}"></th>
+            <th scope="col" th:text="#{shoppingCartPage.productPriceTitle}"></th>
         </tr>
         </thead>
         <tbody>
@@ -21,7 +21,7 @@
             <td th:text="${product.price}"></td>
         </tr>
         <tr>
-            <th scope="row">Total:</th>
+            <th scope="row" th:text="#{shoppingCartPage.priceTotalTitle}"></th>
             <td></td>
             <td></td>
             <td th:text="${shoppingCartTotalPrice}"></td>
@@ -32,20 +32,15 @@
     <div th:if="${shoppingCart != null}">
         <form method="post" th:action="@{/cart/order}">
             <input type="hidden" name="cartId" th:value="${shoppingCart.id}">
-            <button type="submit" class="btn btn-primary">Order</button>
+            <button type="submit" class="btn btn-primary" th:text="#{shoppingCartPage.orderBtn}"></button>
         </form>
     </div>
 
     <div th:if="${shoppingCart == null}">
         <br>
-        <div class="alert alert-primary" role="alert">
-            No products to show.
+        <div class="alert alert-primary" role="alert" th:text="#{shoppingCartPage.noProductsMsg}">
         </div>
     </div>
-
-
-
-
 </div>
 
 </body>

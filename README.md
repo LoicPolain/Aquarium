@@ -40,4 +40,6 @@ Sources:
         -https://www.baeldung.com/spring-security-track-logged-in-users
         -https://www.javadevjournal.com/spring-security/spring-security-session/
         -https://studygyaan.com/spring-boot/httpsession-spring-boot-session-management
+    Internationalization:
+        -https://www.jetbrains.com/help/idea/resource-bundle.html
 

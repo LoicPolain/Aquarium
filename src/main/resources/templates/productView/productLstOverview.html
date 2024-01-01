@@ -6,13 +6,13 @@
 <nav th:insert="~{fragments/navbar::navbar}"></nav>
 <br>
     <div class="container mb-3">
-        <legend>Filter by:</legend>
+        <legend th:text="#{productOverviewPage.filterByTitle}"></legend>
         <div class="container d-flex flex-wrap justify-content-around align-items-stretch">
             <form method="post" th:action="@{/product/overview/category}" th:object="${productObject}">
                 <div class="mb-3">
-                    <label for="productCat" class="form-label">Category</label>
+                    <label for="productCat" class="form-label" th:text="#{productOverviewPage.productCategoryTitle}"></label>
                     <select onchange="this.form.submit()" id="productCat" class="form-select" aria-label="Default select example" name="category">
-                        <option th:value="null">All</option>
+                        <option th:value="null" th:text="#{productOverviewPage.productCategoryOptionAll}"></option>
 
                         <!--This code gets the values of the enum "Category" and adds them as options to the select-->
                         <option th:each="category : ${T(be.ehb.aquarium.model.enums.Category).values()}" th:value="${category}" th:text="${category.getDisplay()}" th:selected="${selectedCat == category}"></option>
@@ -23,9 +23,9 @@
 
             <form method="post" th:action="@{/product/overview/price}" th:object="${productObject}">
                 <div class="mb-3">
-                    <label for="productFilterPrice" class="form-label">Price</label>
+                    <label for="productFilterPrice" class="form-label"th:text="#{productOverviewPage.productPriceTitle}"></label>
                     <select onchange="this.form.submit()" id="productFilterPrice" class="form-select" aria-label="Default select example" name="priceFilter">
-                        <option th:value="null">All</option>
+                        <option th:value="null" th:text="#{productOverviewPage.productCategoryOptionAll}"></option>
 
                         <!--This code gets the values of the enum "priceFilter" and adds them as options to the select-->
                         <option th:each="priceFilter : ${T(be.ehb.aquarium.model.enums.Pricefilter).values()}" th:value="${priceFilter}" th:text="${priceFilter.getDisplay()}" th:selected="${selectedPrice == priceFilter}"></option>
@@ -52,10 +52,10 @@
                 <p class="card-text" th:text="|&euro; ${product.price}|"></p>
 
                 <div class="container d-flex flex-wrap justify-content-around align-items-stretch">
-                    <a th:href="@{~/product/details/{id}(id=${product.id})}" class="btn btn-primary">Details</a>
+                    <a th:href="@{~/product/details/{id}(id=${product.id})}" class="btn btn-primary" th:text="#{productOverviewPage.productDetails}"></a>
                     <form method="post" th:action="@{/product/cart}">
                         <input type="hidden" name="productId" th:value="${product.id}">
-                        <button type="submit" class="btn btn-primary">Add to cart</button>
+                        <button type="submit" class="btn btn-primary" th:text="#{productOverviewPage.AddToCartBtn}"></button>
                     </form>
                 </div>
             </div>

@@ -7,14 +7,12 @@
 <br>
 
 <div th:if="${succes != null}" class="container">
-    <div class="alert alert-success" role="alert">
-        Order succesfully made!
+    <div class="alert alert-success" role="alert" th:text="#{orderSuccessPage.succes}">
     </div>
 </div>
 
 <div th:if="${succes == null}" class="container">
-    <div class="alert alert-warning" role="alert">
-        No order has been made!
+    <div class="alert alert-warning" role="alert" th:text="#{orderSuccessPage.fail}">
     </div>
 </div>
 

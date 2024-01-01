@@ -20,20 +20,22 @@
 
     <form th:action="@{/login}" method="post">
 
-        <legend>Please Log In</legend>
+        <legend th:text="#{loginPage.loginTitle}"></legend>
 
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <label for="exampleInputEmail1" class="form-label" th:text="#{loginPage.emailTitle}"></label>
             <input type="text" class="form-control" id="exampleInputEmail1" name="username" aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            <div id="emailHelp" class="form-text" th:text="#{loginPage.emailHelp}"></div>
         </div>
+
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <label for="exampleInputPassword1" class="form-label" th:text="#{loginPage.passwordTitle}"></label>
             <input type="password" class="form-control" id="exampleInputPassword1" name="password">
         </div>
+
         <div class="d-flex justify-content-between">
-            <button type="submit" value="Log in" class="btn btn-primary">Submit</button>
-            <a th:href="@{~/register}" class="link-primary">Register</a>
+            <button type="submit" value="Log in" class="btn btn-primary" th:text="#{loginPage.loginBtn}"></button>
+            <a th:href="@{~/register}" class="link-primary" th:text="#{loginPage.registerBtn}"></a>
         </div>
     </form>
 </div>

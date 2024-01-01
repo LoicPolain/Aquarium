@@ -16,7 +16,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    @NotBlank(message = "Firstname cannot be empty, blank or whitespace!")
+    @NotBlank(message = "{Firstname cannot be empty, blank or whitespace!}")
     private String firstname;
     @NotBlank(message = "Lastname cannot be empty, blank or whitespace!")
     private String lastname;

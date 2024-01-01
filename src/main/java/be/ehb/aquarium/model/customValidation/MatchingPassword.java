@@ -7,6 +7,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * This code has been copied from the internet: https://www.bezkoder.com/spring-boot-custom-validation/
+ */
 @Constraint(validatedBy = PasswordMatchingValidator.class)
 @Target({ ElementType.TYPE })
 @Retention(RetentionPolicy.RUNTIME)

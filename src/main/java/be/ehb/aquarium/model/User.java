@@ -11,6 +11,7 @@ import jakarta.validation.constraints.Size;
 import java.util.UUID;
 
 @Entity
+//This is a custom validation that checks if both passwords fields match (Confirm password)
 @MatchingPassword(password = "password", confirmPassword = "confirmPassword", message = "Both Passwords must be the same!")
 public class User {
     @Id
@@ -22,7 +23,7 @@ public class User {
     private String lastname;
     @NotBlank(message = "Username cannot be empty, blank or whitespace!")
     private String username;
-    @Email(message = "E-mail must be valid!")
+    @Email(message = "E-mail must be valid!") //This is a custom validation that checks if an email does not already exist in the DB. (Unique email)
     @NotBlank(message = "E-mail cannot be empty, blank or whitespace!")
     @UniqueEmail(message = "Email address does already exist!")
     private String email;
@@ -30,7 +31,7 @@ public class User {
     @Size(min = 8, message = "Password must be at least 8 characters long!")
     private String password;
 
-    @Transient
+    @Transient //Password only needs to be saved once in the DB, this field is used for validation.
     @NotBlank(message = "Password cannot be empty, blank or whitespace!")
     @Size(min = 8, message = "Password must be at least 8 characters long!")
     private String confirmPassword;
@@ -104,5 +105,13 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
     }
 }

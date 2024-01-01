@@ -80,4 +80,12 @@ public class Product {
     public void setCategory(Category category) {
         this.category = category;
     }
+
+    public Set<ShoppingCart> getShoppingCarts() {
+        return shoppingCarts;
+    }
+
+    public void setShoppingCarts(Set<ShoppingCart> shoppingCarts) {
+        this.shoppingCarts = shoppingCarts;
+    }
 }

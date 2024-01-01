@@ -14,7 +14,7 @@ Sources:
     Select - Enum:
         -https://stackoverflow.com/questions/29515366/how-to-display-all-possible-enum-values-in-a-dropdown-list-using-spring-and-thym
         -https://stackoverflow.com/questions/73606088/how-to-display-all-enum-values-in-spring-using-thymeleaf-and-bootstrap
-    Imgae upload:
+    Image upload:
         -https://www.baeldung.com/spring-boot-thymeleaf-image-upload
         -https://stackoverflow.com/questions/42013087/multipartexception-current-request-is-not-a-multipart-request
     ModelView:

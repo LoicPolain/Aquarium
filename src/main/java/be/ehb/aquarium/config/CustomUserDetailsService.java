@@ -14,6 +14,8 @@ import java.util.*;
 
 /**
  * This class gets is a bridge between the DB and Spring Security. It uses the UserRepo interface to access the DB.
+ *
+ * This code has been copied from the internet: https://www.javaguides.net/2018/10/user-registration-module-using-springboot-springmvc-springsecurity-hibernate5-thymeleaf-mysql.html
  */
 @Service
 public class CustomUserDetailsService implements UserDetailsService {

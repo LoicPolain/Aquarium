@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+/**
+ * This class gets is a bridge between the DB and Spring Security. It uses the UserRepo interface to access the DB.
+ */
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
     private UserRepo userRepo;
@@ -21,6 +24,12 @@ public class CustomUserDetailsService implements UserDetailsService {
         this.userRepo = userRepo;
     }
 
+    /**
+     * This method gets the user from the DB. The User model from the DB is than converted to a Spring Security User.
+     * @param email : Needs the email of the user, in order to search the user in the DB.
+     * @return Spring Security-readable User Object.
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepo.findFirstByEmail(email);

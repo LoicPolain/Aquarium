@@ -41,6 +41,7 @@ public class ProductController {
     public Product getProduct(){
         return new Product();
     }
+
     @ModelAttribute("products")
     public Iterable<Product> getAllProduct(){
         return productRepo.findAll();

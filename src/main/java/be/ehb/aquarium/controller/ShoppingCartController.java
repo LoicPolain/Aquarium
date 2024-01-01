@@ -5,6 +5,7 @@ import be.ehb.aquarium.model.ShoppingCart;
 import be.ehb.aquarium.model.User;
 import be.ehb.aquarium.model.dao.ShoppingCartRepo;
 import be.ehb.aquarium.model.dao.UserRepo;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -61,9 +62,13 @@ public class ShoppingCartController {
     }
 
     @PostMapping("/order")
-    public ModelAndView postOrder(@RequestParam("cartId") UUID shoppingCartId){
-        ShoppingCart shoppingCart = shoppingCartRepo.findFirstById(shoppingCartId);
-        if (shoppingCart != null) shoppingCartRepo.delete(shoppingCart);
+    public ModelAndView postOrder(@RequestParam("cartId") UUID shoppingCartId, HttpSession httpSession){
+        ShoppingCart shoppingCart = (ShoppingCart) httpSession.getAttribute("cart");
+        if (shoppingCart == null) shoppingCart = shoppingCartRepo.findFirstById(shoppingCartId);
+        if (shoppingCart != null) {
+            shoppingCartRepo.delete(shoppingCart);
+            httpSession.removeAttribute("cart");
+        }
         ModelAndView modelAndView = new ModelAndView("cartView/orderSucces");
         modelAndView.addObject("succes", true);
         return modelAndView;

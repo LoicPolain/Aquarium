@@ -2,6 +2,7 @@ package be.ehb.aquarium.controller;
 
 import be.ehb.aquarium.model.User;
 import be.ehb.aquarium.model.dao.UserRepo;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

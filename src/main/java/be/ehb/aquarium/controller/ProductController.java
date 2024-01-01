@@ -8,6 +8,8 @@ import be.ehb.aquarium.model.enums.Category;
 import be.ehb.aquarium.model.Product;
 import be.ehb.aquarium.model.dao.ProductRepo;
 import be.ehb.aquarium.model.enums.Pricefilter;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -124,18 +126,26 @@ public class ProductController {
     }
 
     @PostMapping("/cart")
-    public String postAddProductToCart(@RequestParam("productId") UUID productId){
+    public String postAddProductToCart(@RequestParam("productId") UUID productId, HttpSession httpSession){
+        //Get the current loggedin user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserEmail = authentication.getName();
         User tempUser = userRepo.findFirstByEmail(currentUserEmail);
 
+        //Check if user has already a shoppingcart in DB, if not create a new ShoppingCart object
         ShoppingCart tempShoppingCart = shoppingCartRepo.findFirstByUser(tempUser);
         if (tempShoppingCart == null) tempShoppingCart = new ShoppingCart();
+
+        //Add the product and the user to the cart and save the cart to the DB
         Product tempProduct = productRepo.findFirstById(productId);
         tempShoppingCart.getProducts().add(tempProduct);
         tempShoppingCart.setUser(tempUser);
-
         shoppingCartRepo.save(tempShoppingCart);
+
+        //Save cart in userSession
+        httpSession.setAttribute("cart", tempShoppingCart);
+
+        //Return to the productOverview page
         return "redirect:/product/overview";
     }
 

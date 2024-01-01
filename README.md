@@ -34,4 +34,10 @@ Sources:
     JPA Relationships:
         -https://medium.com/@bectorhimanshu/spring-data-jpa-many-to-many-bidirectional-relationship-mapping-a275f8ea62ec
         -https://medium.com/@arijit83work/bidirectional-relationship-using-onetomany-manytoone-annotation-in-spring-boot-3b91980ca222
+    Sessions:
+        -https://stackoverflow.com/questions/74683225/updating-to-spring-security-6-0-replacing-removed-and-deprecated-functionality
+        -https://www.baeldung.com/spring-security-session
+        -https://www.baeldung.com/spring-security-track-logged-in-users
+        -https://www.javadevjournal.com/spring-security/spring-security-session/
+        -https://studygyaan.com/spring-boot/httpsession-spring-boot-session-management
 

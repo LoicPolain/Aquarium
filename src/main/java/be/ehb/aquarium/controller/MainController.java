@@ -2,9 +2,12 @@ package be.ehb.aquarium.controller;
 
 import be.ehb.aquarium.model.User;
 import be.ehb.aquarium.model.dao.UserRepo;
+import be.ehb.aquarium.model.enums.Role;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -18,6 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
     private final UserRepo userRepo;
 
+    @Autowired
+    public MainController(UserRepo userRepo) {
+        this.userRepo = userRepo;
+    }
+
     /**
      * @return a new user object to be used for the registration form.
      */
@@ -26,11 +34,14 @@ public class MainController {
         return new User();
     }
 
-    @Autowired
-    public MainController(UserRepo userRepo) {
-        this.userRepo = userRepo;
+    /**
+     * @return whether the current user has the role/authority ADMIN
+     */
+    @ModelAttribute("isCurrentUserAdmin")
+    public boolean isAdmin(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getAuthorities().contains(Role.ADMIN.toString());
     }
-
 
     /**
      * GET-method to show the homepage.

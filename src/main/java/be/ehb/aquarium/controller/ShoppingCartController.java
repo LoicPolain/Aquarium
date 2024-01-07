@@ -5,6 +5,7 @@ import be.ehb.aquarium.model.ShoppingCart;
 import be.ehb.aquarium.model.User;
 import be.ehb.aquarium.model.dao.ShoppingCartRepo;
 import be.ehb.aquarium.model.dao.UserRepo;
+import be.ehb.aquarium.model.enums.Role;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -27,6 +28,16 @@ public class ShoppingCartController {
     public ShoppingCartController(ShoppingCartRepo shoppingCartRepo, UserRepo userRepo) {
         this.shoppingCartRepo = shoppingCartRepo;
         this.userRepo = userRepo;
+    }
+
+
+    /**
+     * @return whether the current user has the role/authority ADMIN
+     */
+    @ModelAttribute("isCurrentUserAdmin")
+    public boolean isAdmin(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getAuthorities().contains(Role.ADMIN.toString());
     }
 
     /**

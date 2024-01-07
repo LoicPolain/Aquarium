@@ -8,6 +8,7 @@ import be.ehb.aquarium.model.enums.Category;
 import be.ehb.aquarium.model.Product;
 import be.ehb.aquarium.model.dao.ProductRepo;
 import be.ehb.aquarium.model.enums.Pricefilter;
+import be.ehb.aquarium.model.enums.Role;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,15 @@ public class ProductController {
      */
     @Value("${productImage.directory}")
     private final String PRODUCT_IMAGE_FOLDER = System.getProperty("productImage.directory");
+
+    /**
+     * @return whether the current user has the role/authority ADMIN
+     */
+    @ModelAttribute("isCurrentUserAdmin")
+    public boolean isAdmin(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getAuthorities().contains(Role.ADMIN.toString());
+    }
 
     /**
      * @return a new Product object needed for the form for the creation of a new product.
@@ -99,6 +109,7 @@ public class ProductController {
 
                     //We need to save the path of the image in the DB
                     product = productRepo.save(product);
+
                     Files.write(fileNameAndPath, productImage.getBytes());
                 } catch (IOException e) {
                     throw new RuntimeException(e);

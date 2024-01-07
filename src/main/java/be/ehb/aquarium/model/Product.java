@@ -6,6 +6,7 @@ import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -87,5 +88,17 @@ public class Product {
 
     public void setShoppingCarts(Set<ShoppingCart> shoppingCarts) {
         this.shoppingCarts = shoppingCarts;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product product)) return false;
+        return Objects.equals(getId(), product.getId()) && Objects.equals(getProductName(), product.getProductName()) && Objects.equals(getDescription(), product.getDescription()) && Objects.equals(getImagePath(), product.getImagePath()) && Objects.equals(getPrice(), product.getPrice()) && getCategory() == product.getCategory() && Objects.equals(getShoppingCarts(), product.getShoppingCarts());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getProductName(), getDescription(), getImagePath(), getPrice(), getCategory(), getShoppingCarts());
     }
 }

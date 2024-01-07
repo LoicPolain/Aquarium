@@ -60,8 +60,9 @@ public class SecurityConfig{
                 )
                 //Configuration associated with user logout.
                 .logout(logout -> logout
-                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                                .permitAll()
+                        .invalidateHttpSession(true)
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .permitAll()
 
                 )
                 //Configuration associated with user session.
@@ -69,7 +70,7 @@ public class SecurityConfig{
                         .sessionCreationPolicy(SessionCreationPolicy.ALWAYS) // A session will always be created if one doesn’t already exist.
                         .invalidSessionUrl("/login") // When there is an invalid session redirect to "/login" => user needs to log back in.
                         .maximumSessions(1) //Maximum 1 session per customer.
-                        .maxSessionsPreventsLogin(true) // Shows an error message to the second attempt instead of forcing the original user to be logged out.
+                        //.maxSessionsPreventsLogin(true) // Shows an error message to the second attempt instead of forcing the original user to be logged out.
                 )
         ;
         return http.build();

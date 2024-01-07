@@ -16,7 +16,12 @@
         </thead>
         <tbody>
         <tr th:each="product : ${shoppingCart.products}">
-            <th scope="row"></th>
+            <th scope="row">
+                <form method="post" th:action="@{/cart/remove/product}">
+                    <input type="hidden" name="productId" th:value="${product.id}">
+                    <button type="submit" class="btn btn-primary" th:text="#{shoppingCartPage.RemoveProduct}"></button>
+                </form>
+            </th>
             <td th:text="${product.productName}"></td>
             <td th:text="${product.price}"></td>
         </tr>

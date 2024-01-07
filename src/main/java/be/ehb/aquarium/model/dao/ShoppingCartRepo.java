@@ -15,7 +15,7 @@ public interface ShoppingCartRepo extends CrudRepository<ShoppingCart, UUID> {
     ShoppingCart findFirstByUser(User user);
 
     /**
-     * Search an shopping cart in the DB using its UUID.
+     * Search a shopping cart in the DB using its UUID.
      * @param id
      * @return
      */

@@ -3,6 +3,7 @@ package be.ehb.aquarium.controller;
 import be.ehb.aquarium.model.Product;
 import be.ehb.aquarium.model.ShoppingCart;
 import be.ehb.aquarium.model.User;
+import be.ehb.aquarium.model.dao.ProductRepo;
 import be.ehb.aquarium.model.dao.ShoppingCartRepo;
 import be.ehb.aquarium.model.dao.UserRepo;
 import be.ehb.aquarium.model.enums.Role;
@@ -17,9 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 @RequestMapping("/cart")
@@ -27,11 +26,13 @@ public class ShoppingCartController {
 
     private final ShoppingCartRepo shoppingCartRepo;
     private final UserRepo userRepo;
+    private final ProductRepo productRepo;
 
     @Autowired
-    public ShoppingCartController(ShoppingCartRepo shoppingCartRepo, UserRepo userRepo) {
+    public ShoppingCartController(ShoppingCartRepo shoppingCartRepo, UserRepo userRepo, ProductRepo productRepo) {
         this.shoppingCartRepo = shoppingCartRepo;
         this.userRepo = userRepo;
+        this.productRepo = productRepo;
     }
 
 
@@ -121,5 +122,37 @@ public class ShoppingCartController {
         ModelAndView modelAndView = new ModelAndView("cartView/orderSucces");
         modelAndView.addObject("succes", true);
         return modelAndView;
+    }
+
+    /**
+     * This POST method removes a product from the user's shopping cart given the product ID.
+     * @param productId
+     * @param httpSession
+     * @return
+     */
+    @PostMapping("/remove/product")
+    public String removeProductFromShoppingCart(@RequestParam("productId") UUID productId, HttpSession httpSession){
+        //Get the shopping cart from the user-session, if it fails get it from the DB.
+        ShoppingCart shoppingCart = (ShoppingCart) httpSession.getAttribute("cart");
+        if (shoppingCart == null) shoppingCart = shoppingCartRepo.findFirstById(getUsetShoppingCart().getId());
+
+        //Remove the product from the shopping cart
+        if (shoppingCart != null) {
+            Product temp_product = productRepo.findFirstById(productId);
+            Set<Product> products = shoppingCart.getProducts();
+            products.remove(temp_product);
+            shoppingCart.setProducts(products);
+            if (shoppingCart.getProducts().isEmpty()) {
+                shoppingCartRepo.delete(shoppingCart);
+                httpSession.removeAttribute("cart");
+            } else {
+                //Save cart in DB
+                shoppingCartRepo.save(shoppingCart);
+                //Save cart in userSession
+                httpSession.setAttribute("cart", shoppingCart);
+            }
+        }
+        //return the user to the shopping cart overview.
+        return "redirect:/cart/overview";
     }
 }

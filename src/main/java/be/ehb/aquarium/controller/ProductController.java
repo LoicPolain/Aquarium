@@ -152,7 +152,7 @@ public class ProductController {
     }
 
     /**
-     * This method returns the products filtered by price.
+     * This method returns all the products filtered by price.
      * @param priceFilter
      * @return modelview to the productOverview page with a model of products (= the products filtered by price) and the model of the selected priceFilter.
      */
@@ -171,7 +171,7 @@ public class ProductController {
 
     /**
      * @param uuid
-     * @return a page with the details of a specific product, it needs the uuid of a product to get it from the DB
+     * @return a page with the details of a specific product, it needs the uuid of a product to get it from the DB.
      */
     @GetMapping(value = "/details/{id}")
     public ModelAndView getProductDetails(@PathVariable(value = "id")String uuid){

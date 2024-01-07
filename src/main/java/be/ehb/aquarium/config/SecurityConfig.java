@@ -20,8 +20,12 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfig{
 
+    private final UserDetailsService userDetailsService;
+
     @Autowired
-    private UserDetailsService userDetailsService;
+    public SecurityConfig(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
 
     /**
      * @return We are using BCrypt to encode our passwords.
@@ -32,7 +36,7 @@ public class SecurityConfig{
     }
 
     /**
-     * This file or class defines how Spring Security should handle authentication, authorization, and other security-related aspects in our application.
+     * This defines how Spring Security should handle authentication, authorization, and other security-related aspects in our application.
      * @param http
      * @return HttpSecurity object
      * @throws Exception
@@ -70,7 +74,6 @@ public class SecurityConfig{
                         .sessionCreationPolicy(SessionCreationPolicy.ALWAYS) // A session will always be created if one doesn’t already exist.
                         .invalidSessionUrl("/login") // When there is an invalid session redirect to "/login" => user needs to log back in.
                         .maximumSessions(1) //Maximum 1 session per customer.
-                        //.maxSessionsPreventsLogin(true) // Shows an error message to the second attempt instead of forcing the original user to be logged out.
                 )
         ;
         return http.build();

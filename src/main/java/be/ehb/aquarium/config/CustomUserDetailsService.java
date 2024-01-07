@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 /**
- * This class gets is a bridge between the DB and Spring Security. It uses the UserRepo interface to access the DB.
+ * This class is a bridge between the DB and Spring Security. It uses the UserRepo interface to access the DB.
  *
  * This code has been copied from the internet: https://www.javaguides.net/2018/10/user-registration-module-using-springboot-springmvc-springsecurity-hibernate5-thymeleaf-mysql.html
  */
@@ -28,7 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     /**
      * This method gets the user from the DB. The User model from the DB is than converted to a Spring Security User.
-     * @param email : Needs the email of the user, in order to search the user in the DB.
+     * @param email Needs the email of the user, in order to search the user in the DB. (String)
      * @return Spring Security-readable User Object.
      * @throws UsernameNotFoundException
      */

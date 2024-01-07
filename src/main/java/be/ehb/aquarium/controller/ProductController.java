@@ -45,7 +45,7 @@ public class ProductController {
     private final String PRODUCT_IMAGE_FOLDER = System.getProperty("productImage.directory");
 
     /**
-     * @return whether the current user has the role/authority ADMIN
+     * @return boolean: whether the current user has the role/authority ADMIN (ADMIN = true). This method checks if a current authenticated user is admin. (See usage: navbar link to go to the create product page.)
      */
     @ModelAttribute("isCurrentUserAdmin")
     public boolean isAdmin(){

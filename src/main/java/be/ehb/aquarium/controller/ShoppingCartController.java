@@ -37,7 +37,7 @@ public class ShoppingCartController {
 
 
     /**
-     * @return whether the current user has the role/authority ADMIN
+     * @return boolean: whether the current user has the role/authority ADMIN (ADMIN = true). This method checks if a current authenticated user is admin. (See usage: navbar link to go to the create product page.)
      */
     @ModelAttribute("isCurrentUserAdmin")
     public boolean isAdmin(){
@@ -60,7 +60,7 @@ public class ShoppingCartController {
     }
 
     /**
-     * @return the total price in BgDecimal of all the products in the shopping cart of the current logged-in user.
+     * @return the total price in BigDecimal of all the products in the shopping cart of the current logged-in user.
      */
     @ModelAttribute("shoppingCartTotalPrice")
     public String getTotalPriceShoppingCart(){
@@ -142,6 +142,8 @@ public class ShoppingCartController {
             Set<Product> products = shoppingCart.getProducts();
             products.remove(temp_product);
             shoppingCart.setProducts(products);
+
+            //If the cart is empty, delete the cart
             if (shoppingCart.getProducts().isEmpty()) {
                 shoppingCartRepo.delete(shoppingCart);
                 httpSession.removeAttribute("cart");

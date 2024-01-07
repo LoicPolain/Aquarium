@@ -44,7 +44,9 @@
     <div class="mb-3 align-self-stretch" th:each="product : ${products}">
 
         <div class="card mb-3" style="width: 18rem;">
-            <img th:src="@{/productImages/{id}/{fileName}(id=${product.id}, fileName=*{product.imagePath})}" class="card-img-top" alt="...">
+            <div th:if="*{product.imagePath}">
+                <img th:src="@{/productImages/{id}/{fileName}(id=${product.id}, fileName=*{product.imagePath})}" class="card-img-top" th:alt="*{product.productName}">
+            </div>
             <div class="card-body">
                 <h5 class="card-title" th:text="${product.productName}"></h5>
                 <p class="card-text" th:text="${product.description}"></p>

@@ -8,7 +8,9 @@
 <br>
     <div class="container" th:object="${product}">
         <div class="card mb-3">
-            <img th:src="@{/productImages/{id}/{fileName}(id=*{id}, fileName=*{imagePath})}" class="card-img-top" th:alt="*{productName}">
+            <div th:if="*{imagePath}">
+                <img th:src="@{/productImages/{id}/{fileName}(id=*{id}, fileName=*{imagePath})}" class="card-img-top" th:alt="*{productName}">
+            </div>
             <div class="card-body">
                 <h5 class="card-title" th:text="*{productName}"></h5>
                 <p class="card-text" th:text="*{description}"></p>
